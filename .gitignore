@@ -1,2 +1,9 @@
 # macOS
 .DS_Store
+
+# C/C++
+*.out
+
+# Tests
+*.in
+*.out
