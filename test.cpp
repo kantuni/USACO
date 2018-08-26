@@ -1,7 +1,7 @@
 /*
-  ID: henrikh1
-  TASK: test
-  LANG: C++14
+ID: henrikh1
+TASK: test
+LANG: C++14
 */
 
 #include <bits/stdc++.h>
