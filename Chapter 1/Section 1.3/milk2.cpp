@@ -13,7 +13,7 @@ int main() {
   ofstream fout("milk2.out");
   int n;
   fin >> n;
-  vector<int> color(MAXN, 0);
+  vector<int> cows(MAXN, 0);
   int start = MAXN, end = 0;
   for (int i = 0; i < n; i++) {
     int l, r;
@@ -21,20 +21,20 @@ int main() {
     start = min(start, l);
     end = max(end, r);
     for (int j = l; j < r; j++) {
-      color[j]++;
+      cows[j]++;
     }
   }
-  int milk = color[start] ? 1 : 0;
-  int nomilk = color[start] ? 0 : 1;
+  int milk = cows[start] ? 1 : 0;
+  int nomilk = cows[start] ? 0 : 1;
   int tm = milk, tnm = nomilk;
   for (int i = start + 1; i < end; i++) {
-    if (color[i] > 0) {
-      if (color[i - 1] == 0) {
+    if (cows[i] > 0) {
+      if (cows[i - 1] == 0) {
         milk = 0;
       }
       milk++;
     } else {
-      if (color[i - 1] > 0) {
+      if (cows[i - 1] > 0) {
         nomilk = 0;
       }
       nomilk++;
