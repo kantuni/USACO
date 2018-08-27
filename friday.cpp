@@ -7,31 +7,30 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
+int din[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+int mlen(int m, int y) {
+  bool leap = y % 400 == 0 or (y % 4 == 0 and y % 100 != 0);
+  return (m == 1) ? din[m] + leap : din[m];
+}
+
 int main() {
   ifstream fin("friday.in");
   ofstream fout("friday.out");
   int n;
   fin >> n;
-  vector<int> days(12, 31);
-  days[3] = days[5] = days[8] = days[10] = 30;
   vector<int> f(7, 0);
-  int start = 1;
+  // Jan 13, 1900 was Saturday.
+  int dow = 0;
   for (int y = 1900; y < 1900 + n; y++) {
-    bool leap = y % 400 == 0 or (y % 4 == 0 and y % 100 != 0);
-    days[1] = leap ? 29 : 28; 
     for (int m = 0; m < 12; m++) {
-      for (int d = 0; d < days[m]; d++) {
-        if (d == 12) {
-          f[start]++;
-        }
-        start = (start + 1) % 7;
-      }
+      f[dow]++;
+      dow = (dow + mlen(m, y)) % 7;
     }
   }
-  fout << f[6] << " ";
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < f.size(); i++) {
     fout << f[i];
-    if (i != 5) {
+    if (i != f.size() - 1) {
       fout << " ";
     }
   }
