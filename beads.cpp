@@ -53,7 +53,7 @@ int main() {
       cut += string(1, s[j % n]);
     }
     int beads = front(cut) + back(cut);
-    ans = max(ans, (beads > n) ? n : beads);
+    ans = max(ans, min(beads, n));
   }
   fout << ans << "\n";
   return 0;
