@@ -20,7 +20,6 @@ int main() {
   int n;
   fin >> n;
   vector<int> f(7, 0);
-  // Jan 13, 1900 was Saturday.
   int dow = 0;
   for (int y = 1900; y < 1900 + n; y++) {
     for (int m = 0; m < 12; m++) {
