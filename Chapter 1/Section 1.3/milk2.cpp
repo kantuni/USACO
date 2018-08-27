@@ -24,24 +24,24 @@ int main() {
       color[j]++;
     }
   }
-  int yes = color[start] ? 1 : 0;
-  int no = color[start] ? 0 : 1;
-  int ymax = yes, nmax = no;
+  int milk = color[start] ? 1 : 0;
+  int nomilk = color[start] ? 0 : 1;
+  int tm = milk, tnm = nomilk;
   for (int i = start + 1; i < end; i++) {
     if (color[i] > 0) {
       if (color[i - 1] == 0) {
-        yes = 0;
+        milk = 0;
       }
-      yes++;
+      milk++;
     } else {
       if (color[i - 1] > 0) {
-        no = 0;
+        nomilk = 0;
       }
-      no++;
+      nomilk++;
     }
-    ymax = max(ymax, yes);
-    nmax = max(nmax, no);
+    tm = max(tm, milk);
+    tnm = max(tnm, nomilk);
   }
-  fout << ymax << " " << nmax << "\n";
+  fout << tm << " " << tnm << "\n";
   return 0;
 }
