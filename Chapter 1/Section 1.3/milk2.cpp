@@ -28,16 +28,10 @@ int main() {
   int nomilk = cows[start] ? 0 : 1;
   int tm = milk, tnm = nomilk;
   for (int i = start + 1; i < end; i++) {
-    if (cows[i] > 0) {
-      if (cows[i - 1] == 0) {
-        milk = 0;
-      }
-      milk++;
+    if (cows[i]) {
+      milk = cows[i - 1] ? milk + 1 : 1;
     } else {
-      if (cows[i - 1] > 0) {
-        nomilk = 0;
-      }
-      nomilk++;
+      nomilk = cows[i - 1] ? 1 : nomilk + 1;
     }
     tm = max(tm, milk);
     tnm = max(tnm, nomilk);
