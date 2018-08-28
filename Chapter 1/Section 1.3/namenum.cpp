@@ -29,18 +29,17 @@ int main() {
   memo['W'] = memo['X'] = memo['Y'] = '9';
   vector<string> match;
   for (string name: names) {
-    if (name.size() != num.size()) {
-      continue;
-    }
-    bool valid = true;
-    for (int i = 0; i < name.size(); i++) {
-      if (memo[name[i]] != num[i]) {
-        valid = false;
-        break;
+    if (name.size() == num.size()) {
+      bool valid = true;
+      for (int i = 0; i < name.size(); i++) {
+        if (memo[name[i]] != num[i]) {
+          valid = false;
+          break;
+        }
       }
-    }
-    if (valid) {
-      match.push_back(name);
+      if (valid) {
+        match.push_back(name);
+      }
     }
   }
   if (match.size() == 0) {
