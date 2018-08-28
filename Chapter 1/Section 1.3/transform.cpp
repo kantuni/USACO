@@ -15,19 +15,15 @@ vvc transform(vvc A, int t) {
     for (int c = 0; c < A.size(); c++) {
       int rr, rc;
       if (t == 1) {
-        // Rotate 90º clockwise.
         rr = A.size() - 1 - c;
         rc = r;
       } else if (t == 2) {
-        // Rotate 180º clockwise.
         rr = A.size() - 1 - r;
         rc = A.size() - 1 - c;
       } else if (t == 3) {
-        // Rotate 270º clockwise.
         rr = c;
         rc = A.size() - 1 - r;
       } else if (t == 4) {
-        // Reflect
         rr = r;
         rc = A.size() - 1 - c; 
       }
