@@ -27,7 +27,7 @@ int main() {
   memo['P'] = memo['R'] = memo['S'] = '7';
   memo['T'] = memo['U'] = memo['V'] = '8';
   memo['W'] = memo['X'] = memo['Y'] = '9';
-  vector<string> match;
+  bool nonames = true;
   for (string name: names) {
     if (name.size() == num.size()) {
       bool valid = true;
@@ -38,16 +38,13 @@ int main() {
         }
       }
       if (valid) {
-        match.push_back(name);
+        nonames = false;
+        fout << name << "\n";
       }
     }
   }
-  if (match.size() == 0) {
+  if (nonames) {
     fout << "NONE\n";
-  } else {
-    for (string m: match) {
-      fout << m << "\n";
-    }
   }
   return 0;
 }
