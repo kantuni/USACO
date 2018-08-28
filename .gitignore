@@ -4,6 +4,7 @@
 # C/C++
 *.out
 
-# Tests
+# Misc
 *.in
 *.out
+*.txt
