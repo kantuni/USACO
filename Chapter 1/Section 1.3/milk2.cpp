@@ -5,7 +5,6 @@ LANG: C++14
 */
 
 #include <bits/stdc++.h>
-#define MAXN 1000001
 using namespace std;
 
 int main() {
@@ -13,6 +12,7 @@ int main() {
   ofstream fout("milk2.out");
   int n;
   fin >> n;
+  const int MAXN = 1000001;
   vector<int> cows(MAXN, 0);
   int start = MAXN, end = 0;
   for (int i = 0; i < n; i++) {
