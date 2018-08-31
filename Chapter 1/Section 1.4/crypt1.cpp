@@ -38,9 +38,7 @@ int main() {
       int p = y * 10 + x;
       bool ok = check(i, 3) and check(j, 2) and check(x, 3) and
                 check(y, 3) and check(p, 4);
-      if (ok) {
-        ans++;
-      }
+      ans += ok;
     }
   }
   fout << ans << "\n";
