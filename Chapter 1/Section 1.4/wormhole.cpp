@@ -7,7 +7,7 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string> combs(string s) {
+vector<string> n_choose_two(string s) {
   vector<string> ans;
   if (s.size() == 2) {
     return {s};
@@ -15,7 +15,7 @@ vector<string> combs(string s) {
   for (int i = 1; i < s.size(); i++) {
     string sc = s;
     swap(sc[1], sc[i]);
-    vector<string> rest = combs(sc.substr(2));
+    vector<string> rest = n_choose_two(sc.substr(2));
     for (int j = 0; j < rest.size(); j++) {
       ans.push_back(
         string(1, sc[0]) + 
@@ -34,45 +34,43 @@ int main() {
   fin >> n;
   vector<pair<int, int>> c(n);
   for (int i = 0; i < n; i++) {
-    fin >> c[i].first >> c[i].second;
+    fin >> c[i].second >> c[i].first;
+  }
+  sort(c.begin(), c.end());
+  vector<int> next(n, -1);
+  for (int i = 0; i < n - 1; i++) {
+    if (c[i].first == c[i + 1].first) {
+      next[i] = i + 1;
+    }
   }
   string s;
   for (int i = 0; i < n; i++) {
     s += to_string(i);
   }
   int ans = 0;
-  vector<string> res = combs(s);
-  for (int i = 0; i < res.size(); i++) {
-    cout << res[i] << "\n";
-    // TODO: the check is incorrect
-    bool loop = false;
+  vector<string> combs = n_choose_two(s);
+  for (int i = 0; i < combs.size(); i++) {
+    string comb = combs[i];
+    vector<int> redir(n);
     for (int j = 0; j < n; j += 2) {
-      auto p1 = c[res[i][j] - '0'];
-      auto p2 = c[res[i][j + 1] - '0'];
-      if (p1.second == p2.second) {
-        loop = true;
-        break;
-      }
+      redir[comb[j] - '0'] = comb[j + 1] - '0';
+      redir[comb[j + 1] - '0'] = comb[j] - '0';
     }
-    // TODO: find (AC),(BD) pattern
-    for (int j = 0; j < n - 2; j += 2) {
-      auto p1 = c[res[i][j] - '0'];
-      auto p2 = c[res[i][j + 1] - '0'];
-      auto p3 = c[res[i][j + 2] - '0'];
-      auto p4 = c[res[i][j + 3] - '0'];
-      bool l1 = p1.second == p3.second and 
-                p2.second == p4.second and
-                p4.second < p1.second;
-      bool l2 = p2.second == p3.second and
-                p1.second == p4.second and
-                p4.second < p2.second;
-      if (l1 or l2) {
-        loop = true;
-        break;
+    bool loop = false;
+    for (int j = 0; !loop and j < n; j++) {
+      vector<int> color(n, 0);
+      int curr = j;
+      while (next[curr] != -1) {
+        if (color[curr] == 1) {
+          loop = true;
+          break;
+        }
+        color[curr] = 1;
+        curr = redir[next[curr]];
       }
     }
     ans += loop;
   }
-  fout << ans << "\n";
+  cout << ans << "\n";
   return 0;
 }
