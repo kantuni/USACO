@@ -4,7 +4,6 @@
 # C/C++
 *.out
 
-# Misc
+# Miscellaneous
 *.in
-*.out
 *.txt
