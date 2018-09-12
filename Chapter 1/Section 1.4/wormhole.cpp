@@ -7,21 +7,22 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string> n_choose_two(string s) {
-  vector<string> ans;
-  if (s.size() == 2) {
-    return {s};
+vector<vector<int>> pairings(vector<int> nums) {
+  vector<vector<int>> ans;
+  if (nums.size() == 2) {
+    return {nums};
   }
-  for (int i = 1; i < s.size(); i++) {
-    string sc = s;
-    swap(sc[1], sc[i]);
-    vector<string> rest = n_choose_two(sc.substr(2));
+  for (int i = 1; i < nums.size(); i++) {
+    vector<int> tmp(nums);
+    swap(tmp[1], tmp[i]);
+    vector<int> sub(tmp.begin() + 2, tmp.end());
+    vector<vector<int>> rest = pairings(sub);
     for (int j = 0; j < rest.size(); j++) {
-      ans.push_back(
-        string(1, sc[0]) + 
-        string(1, sc[1]) + 
-        rest[j]
-      );
+      vector<int> comb;
+      comb.push_back(tmp[0]);
+      comb.push_back(tmp[1]);
+      comb.insert(comb.end(), rest[j].begin(), rest[j].end());
+      ans.push_back(comb);
     }
   }
   return ans;
@@ -43,18 +44,17 @@ int main() {
       next[i] = i + 1;
     }
   }
-  string s;
+  vector<int> nums(n);
   for (int i = 0; i < n; i++) {
-    s += to_string(i);
+    nums[i] = i;
   }
   int ans = 0;
-  vector<string> combs = n_choose_two(s);
+  vector<vector<int>> combs = pairings(nums);
   for (int i = 0; i < combs.size(); i++) {
-    string comb = combs[i];
     vector<int> redir(n);
     for (int j = 0; j < n; j += 2) {
-      redir[comb[j] - '0'] = comb[j + 1] - '0';
-      redir[comb[j + 1] - '0'] = comb[j] - '0';
+      redir[combs[i][j]] = combs[i][j + 1];
+      redir[combs[i][j + 1]] = combs[i][j];
     }
     bool loop = false;
     for (int j = 0; !loop and j < n; j++) {
@@ -71,6 +71,6 @@ int main() {
     }
     ans += loop;
   }
-  cout << ans << "\n";
+  fout << ans << "\n";
   return 0;
 }
