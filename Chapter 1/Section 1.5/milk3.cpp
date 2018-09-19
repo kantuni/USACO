@@ -17,7 +17,7 @@ string hsh(int a, int b, int c) {
          to_string(c);
 }
 
-int poor(int f, int cf, int t, int ct) {
+int pour(int f, int cf, int t, int ct) {
   int left = ct - t;
   return min(f, left);
 }
@@ -32,17 +32,17 @@ void solve(int a, int b, int c) {
     ans.insert(c);
   }
   int amnt;
-  amnt = poor(a, ca, b, cb);
+  amnt = pour(a, ca, b, cb);
   solve(a - amnt, b + amnt, c);
-  amnt = poor(b, cb, a, ca);
+  amnt = pour(b, cb, a, ca);
   solve(a + amnt, b - amnt, c);
-  amnt = poor(a, ca, c, cc);
+  amnt = pour(a, ca, c, cc);
   solve(a - amnt, b, c + amnt);
-  amnt = poor(c, cc, a, ca);
+  amnt = pour(c, cc, a, ca);
   solve(a + amnt, b, c - amnt);
-  amnt = poor(b, cb, c, cc);
+  amnt = pour(b, cb, c, cc);
   solve(a, b - amnt, c + amnt);
-  amnt = poor(c, cc, b, cb);
+  amnt = pour(c, cc, b, cb);
   solve(a, b + amnt, c - amnt);
 }
 
