@@ -32,22 +32,16 @@ void solve(int a, int b, int c) {
     ans.insert(c);
   }
   int amnt;
-  // a->b
   amnt = poor(a, ca, b, cb);
   solve(a - amnt, b + amnt, c);
-  // b->a
   amnt = poor(b, cb, a, ca);
   solve(a + amnt, b - amnt, c);
-  // a->c
   amnt = poor(a, ca, c, cc);
   solve(a - amnt, b, c + amnt);
-  // c->a
   amnt = poor(c, cc, a, ca);
   solve(a + amnt, b, c - amnt);
-  // b->c
   amnt = poor(b, cb, c, cc);
   solve(a, b - amnt, c + amnt);
-  // c->b
   amnt = poor(c, cc, b, cb);
   solve(a, b + amnt, c - amnt);
 }
