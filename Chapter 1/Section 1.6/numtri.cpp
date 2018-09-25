@@ -5,38 +5,36 @@ LANG: C++14
 */
 
 #include <bits/stdc++.h>
+#define MAX_N 1005
 using namespace std;
 
-vector<vector<int>> t;
-map<string, int> memo;
+int memo[MAX_N][MAX_N];
+int t[MAX_N][MAX_N];
 
-string hsh(int i, int j) {
-  return to_string(i) + "," + to_string(j);
-}
-
-int solve(int i, int j) {
-  if (i == t.size() or j > i + 1) {
+int solve(int i, int j, int n) {
+  if (i == n or j > i + 1) {
     return 0;
   }
-  string left = hsh(i + 1, j);
-  string right = hsh(i + 1, j + 1);
-  memo[left] = !memo.count(left) ? solve(i + 1, j) : memo[left];
-  memo[right] = !memo.count(right) ? solve(i + 1, j + 1) : memo[right];
-  return t[i][j] + max(memo[left], memo[right]);
+  if (memo[i + 1][j] == -1) {
+    memo[i + 1][j] = solve(i + 1, j, n);
+  }
+  if (memo[i + 1][j + 1] == -1) {
+    memo[i + 1][j + 1] = solve(i + 1, j + 1, n);
+  }
+  return t[i][j] + max(memo[i + 1][j], memo[i + 1][j + 1]); 
 }
 
 int main() {
   ifstream fin("numtri.in");
   ofstream fout("numtri.out");
+  memset(memo, -1, sizeof memo);
   int n;
   fin >> n;
-  t.resize(n);
   for (int i = 0; i < n; i++) {
-    t[i].resize(i + 1);
     for (int j = 0; j < i + 1; j++) {
       fin >> t[i][j];
     }
   }
-  fout << solve(0, 0) << "\n";
+  fout << solve(0, 0, n) << "\n";
   return 0;
 }
