@@ -8,7 +8,7 @@ LANG: C++14
 using namespace std;
 
 bool prime(int n, int a, int b) {
-  if (n < a or n > b) {
+  if (n < a or n > b or n < 2) {
     return false;
   }
   for (int i = 2; i < sqrt(1.0 * n) + 1; i++) {
