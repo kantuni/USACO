@@ -1,9 +1,7 @@
 # macOS
 .DS_Store
 
-# C/C++
-*.out
-
 # Miscellaneous
 *.in
+*.out
 *.txt
