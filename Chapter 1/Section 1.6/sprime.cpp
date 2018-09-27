@@ -25,7 +25,7 @@ void solve(int p, int curr, int n) {
     solve(5, curr + 1, n);
     solve(7, curr + 1, n);
   } else if (curr < n + 1) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 1; i < 10; i += 2) {
       int super = p * 10 + i;
       if (prime(super)) {
         solve(super, curr + 1, n);
