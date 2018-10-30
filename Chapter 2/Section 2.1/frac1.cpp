@@ -11,11 +11,6 @@ struct Fraction {
   int num;
   int denom;
 
-  Fraction(int num, int denom) {
-    this->num = num;
-    this->denom = denom;
-  }
-
   bool operator < (Fraction f) const {
     return num * f.denom < f.num * denom;
   }
@@ -30,7 +25,9 @@ set<Fraction> memo;
 void solve(int num, int denom, int n) {
   if (num <= denom) {
     int d = gcd(num, denom);
-    Fraction f(num / d, denom / d);
+    Fraction f;
+    f.num = num / d;
+    f.denom = denom / d;
     if (!memo.count(f)) {
       memo.insert(f);
     }
