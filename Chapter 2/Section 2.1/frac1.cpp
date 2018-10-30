@@ -25,9 +25,7 @@ set<Fraction> memo;
 void solve(int num, int denom, int n) {
   if (num <= denom) {
     int d = gcd(num, denom);
-    Fraction f;
-    f.num = num / d;
-    f.denom = denom / d;
+    Fraction f = {num / d, denom / d};
     if (!memo.count(f)) {
       memo.insert(f);
     }
