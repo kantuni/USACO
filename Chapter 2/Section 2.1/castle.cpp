@@ -76,6 +76,15 @@ int main() {
         }
         if (mp[i][j] & s) {
           mp[i][j] -= s;
+          if (s == 1) {
+            mp[i][j - 1] -= 4;
+          } else if (s == 2) {
+            mp[i - 1][j] -= 8;
+          } else if (s == 4) {
+            mp[i][j + 1] -= 1;
+          } else {
+            mp[i + 1][j] -= 2;
+          }
           comp = 1;
           mr = -1;
           color.assign(n, vector<int>(m));
@@ -103,6 +112,15 @@ int main() {
             }
           }
           mp[i][j] += s;
+          if (s == 1) {
+            mp[i][j - 1] += 4;
+          } else if (s == 2) {
+            mp[i - 1][j] += 8;
+          } else if (s == 4) {
+            mp[i][j + 1] += 1;
+          } else {
+            mp[i + 1][j] += 2;
+          }
         }
       }
     }
