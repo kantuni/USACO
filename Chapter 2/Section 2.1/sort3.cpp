@@ -7,24 +7,40 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<int> a, b;
+vector<int> color;
+
+int dfs(int start, int i) {
+  color[i] = 1;
+  if (b[i] == start) {
+    return 0;
+  }
+  for (int j = 0; j < a.size(); j++) {
+    if (color[j] == 0 and a[j] == b[i]) {
+      return 1 + dfs(start, j);
+    }
+  }
+  return 0;
+}
+
 int main() {
-  //ifstream fin("sort3.in");
-  //ofstream fout("sort3.out");
+  ifstream fin("sort3.in");
+  ofstream fout("sort3.out");
   int n;
-  cin >> n;
-  vector<int> a(n);
+  fin >> n;
+  a.resize(n);
+  color.resize(n);
   for (int i = 0; i < n; i++) {
-    cin >> a[i];
+    fin >> a[i];
   }
-  vector<int> b(a);
+  b = a;
   sort(b.begin(), b.end());
+  int ans = 0;
   for (int i = 0; i < n; i++) {
-    cout << a[i] << " ";
+    if (color[i] == 0) {
+      ans += dfs(a[i], i);
+    }
   }
-  cout << "\n";
-  for (int i = 0; i < n; i++) {
-    cout << b[i] << " ";
-  }
-  cout << "\n"; 
+  fout << ans << "\n";
   return 0;
 }
