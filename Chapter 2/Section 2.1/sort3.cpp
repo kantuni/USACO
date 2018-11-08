@@ -7,33 +7,16 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> a, b;
-vector<int> color;
-
-int dfs(int start, int i) {
-  color[i] = 1;
-  if (b[i] == start) {
-    return 0;
-  }
-  for (int j = 0; j < a.size(); j++) {
-    if (color[j] == 0 and a[j] == b[i]) {
-      return 1 + dfs(start, j);
-    }
-  }
-  return 0;
-}
-
 int main() {
   ifstream fin("sort3.in");
   ofstream fout("sort3.out");
   int n;
   fin >> n;
-  a.resize(n);
-  color.resize(n);
+  vector<int> a(n), color(n);
   for (int i = 0; i < n; i++) {
     fin >> a[i];
   }
-  b = a;
+  vector<int> b(a);
   sort(b.begin(), b.end());
   int ans = 0;
   for (int i = 0; i < n; i++) {
@@ -42,18 +25,39 @@ int main() {
     }
   }
   for (int i = 0; i < n; i++) {
+    if (color[i] == 1) {
+      continue;
+    }
     for (int j = i + 1; j < n; j++) {
-      bool untouched = color[i] == 0 and color[j] == 0;
-      if (untouched and a[i] == b[j] and b[i] == a[j]) {
-        swap(a[i], b[j]);
+      if (color[j] == 1) {
+        continue;
+      }
+      if (a[i] == b[j] and a[j] == b[i]) {
+        swap(a[i], a[j]);
         color[i] = color[j] = 1;
         ans++;
       }
     }
   }
   for (int i = 0; i < n; i++) {
-    if (color[i] == 0) {
-      ans += dfs(a[i], i);
+    if (color[i] == 1) {
+      continue;
+    }
+    for (int j = 0; j < n; j++) {
+      if (color[j] == 1) {
+        continue;
+      }
+      for (int k = 0; k < n; k++) {
+        if (color[k] == 1) {
+          continue;
+        }
+        if (a[i] == b[j] and a[j] == b[k] and a[k] == b[i]) {
+          swap(a[i], a[j]);
+          swap(a[i], a[k]);
+          color[i] = color[j] = color[k] = 1;
+          ans += 2;
+        }
+      }
     }
   }
   fout << ans << "\n";
