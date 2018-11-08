@@ -17,18 +17,10 @@ int dfs(int i, int j, int comp) {
   color[i][j] = comp;
   int cell = mp[i][j];
   int size = 0;
-  if ((cell & 8) == 0) {
-    size += dfs(i + 1, j, comp);
-  }
-  if ((cell & 4) == 0) {
-    size += dfs(i, j + 1, comp);
-  }
-  if ((cell & 2) == 0) {
-    size += dfs(i - 1, j, comp);
-  }
-  if ((cell & 1) == 0) {
-    size += dfs(i, j - 1, comp);
-  }
+  size += (cell & 8) == 0 ? dfs(i + 1, j, comp) : 0;
+  size += (cell & 4) == 0 ? dfs(i, j + 1, comp) : 0;
+  size += (cell & 2) == 0 ? dfs(i - 1, j, comp) : 0;
+  size += (cell & 1) == 0 ? dfs(i, j - 1, comp) : 0;
   return size + 1;
 }
 
@@ -62,18 +54,10 @@ int main() {
     for (int j = 0; j < m; j++) {
       for (int k = 0; k < 4; k++) {
         int s = pow(2, k);
-        if (i == 0 and s == 2) {
-          continue;
-        }
-        if (j == 0 and s == 1) {
-          continue;
-        }
-        if (i == n - 1 and s == 8) {
-          continue;
-        }
-        if (j == m - 1 and s == 4) {
-          continue;
-        }
+        if (i == 0 and s == 2) continue;
+        if (j == 0 and s == 1) continue;
+        if (i == n - 1 and s == 8) continue;
+        if (j == m - 1 and s == 4) continue;
         if (mp[i][j] & s) {
           mp[i][j] -= s;
           if (s == 1) {
