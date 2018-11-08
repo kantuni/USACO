@@ -25,13 +25,9 @@ int main() {
     }
   }
   for (int i = 0; i < n; i++) {
-    if (color[i] == 1) {
-      continue;
-    }
+    if (color[i] == 1) continue;
     for (int j = i + 1; j < n; j++) {
-      if (color[j] == 1) {
-        continue;
-      }
+      if (color[j] == 1) continue;
       if (a[i] == b[j] and a[j] == b[i]) {
         swap(a[i], a[j]);
         color[i] = color[j] = 1;
@@ -40,17 +36,11 @@ int main() {
     }
   }
   for (int i = 0; i < n; i++) {
-    if (color[i] == 1) {
-      continue;
-    }
+    if (color[i] == 1) continue;
     for (int j = 0; j < n; j++) {
-      if (color[j] == 1) {
-        continue;
-      }
+      if (color[j] == 1) continue;
       for (int k = 0; k < n; k++) {
-        if (color[k] == 1) {
-          continue;
-        }
+        if (color[k] == 1) continue;
         if (a[i] == b[j] and a[j] == b[k] and a[k] == b[i]) {
           swap(a[i], a[j]);
           swap(a[i], a[k]);
