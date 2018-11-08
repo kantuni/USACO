@@ -37,6 +37,21 @@ int main() {
   sort(b.begin(), b.end());
   int ans = 0;
   for (int i = 0; i < n; i++) {
+    if (a[i] == b[i]) {
+      color[i] = 1;
+    }
+  }
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      bool untouched = color[i] == 0 and color[j] == 0;
+      if (untouched and a[i] == b[j] and b[i] == a[j]) {
+        swap(a[i], b[j]);
+        color[i] = color[j] = 1;
+        ans++;
+      }
+    }
+  }
+  for (int i = 0; i < n; i++) {
     if (color[i] == 0) {
       ans += dfs(a[i], i);
     }
