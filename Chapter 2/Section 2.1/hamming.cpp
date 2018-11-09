@@ -38,9 +38,7 @@ int main() {
   }
   for (int i = 0; i < n; i++) {
     fout << ans[i];
-    bool tenth = (i + 1) % 10 == 0;
-    bool last = i == n - 1;
-    if (tenth or last) {
+    if (i == n - 1 or (i + 1) % 10 == 0) {
       fout << "\n";
     } else {
       fout << " ";
