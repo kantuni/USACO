@@ -7,9 +7,6 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> ans;
-int n, b, d;
-
 int hamming(int a, int b) {
   int x = a xor b;
   int dist = 0;
@@ -20,28 +17,28 @@ int hamming(int a, int b) {
   return dist;
 }
 
-void dfs(int i) {
-  ans.push_back(i);
-  if (ans.size() == n) {
-    return;
-  }
-  for (int j = i; true; j++) {
-    int dist = hamming(i, j);
-    if (dist >= d) {
-      dfs(j);
-      break;
-    }
-  }
-}
-
 int main() {
   ifstream fin("hamming.in");
   ofstream fout("hamming.out");
+  int n, b, d;
   fin >> n >> b >> d;
-  dfs(0);
+  vector<int> ans;
+  for (int i = 0; ans.size() < n; i++) {
+    bool ok = true;
+    for (int j = 0; j < ans.size(); j++) {
+      int dist = hamming(i, ans[j]);
+      if (dist < d) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) {
+      ans.push_back(i);
+    }
+  }
   for (int i = 0; i < n; i++) {
     fout << ans[i];
-    bool tenth = i > 0 and i % 9 == 0;
+    bool tenth = (i + 1) % 10 == 0;
     bool last = i == n - 1;
     if (tenth or last) {
       fout << "\n";
