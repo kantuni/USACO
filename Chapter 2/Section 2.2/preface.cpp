@@ -7,6 +7,7 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
+string r[] = {"I", "V", "X", "L", "C", "D", "M"};
 string r1[] = {"I", "X", "C", "M"};
 string r5[] = {"V", "L", "D"};
 
@@ -49,10 +50,9 @@ int main() {
       ans[l]++;
     }
   }
-  char r[7] = {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
   for (int i = 0; i < 7; i++) {
-    if (ans[r[i]] != 0) {
-      fout << r[i] << " " << ans[r[i]] << endl;
+    if (ans[r[i][0]] != 0) {
+      fout << r[i] << " " << ans[r[i][0]] << endl;
     }
   }
   return 0;
