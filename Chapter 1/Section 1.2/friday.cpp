@@ -33,6 +33,6 @@ int main() {
       fout << " ";
     }
   }
-  fout << "\n";
+  fout << endl;
   return 0;
 }
