@@ -55,6 +55,6 @@ int main() {
     int beads = front(cut) + back(cut);
     ans = max(ans, min(beads, n));
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
