@@ -12,6 +12,6 @@ int main() {
   ofstream fout("test.out");
   int a, b;
   fin >> a >> b;
-  fout << a + b << "\n";
+  fout << a + b << endl;
   return 0;
 }
