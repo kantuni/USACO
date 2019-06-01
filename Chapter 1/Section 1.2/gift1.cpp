@@ -24,7 +24,7 @@ int main() {
     int total, m;
     fin >> total >> m;
     if (m > 0) {
-      memo[giver] += -m * (total / m);
+      memo[giver] -= m * (total / m);
     }
     for (int j = 0; j < m; j++) {
       string name;
