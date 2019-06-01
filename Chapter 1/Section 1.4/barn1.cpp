@@ -37,6 +37,6 @@ int main() {
     }
   }
   ans += stalls[c - 1] - curr + 1;
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
