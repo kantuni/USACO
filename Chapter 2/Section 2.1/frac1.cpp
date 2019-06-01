@@ -8,19 +8,18 @@ LANG: C++14
 using namespace std;
 
 struct Fraction {
-  int num;
-  int denom;
+  int num, denom;
 
   bool operator < (Fraction f) const {
     return num * f.denom < f.num * denom;
   }
 };
 
+set<Fraction> memo;
+
 int gcd(int a, int b) {
   return b == 0 ? a : gcd(b, a % b);
 }
-
-set<Fraction> memo;
 
 void solve(int num, int denom, int n) {
   if (num <= denom) {
@@ -42,7 +41,7 @@ int main() {
   fin >> n;
   solve(0, 1, n);
   for (auto f: memo) {
-    fout << f.num << "/" << f.denom << "\n";
+    fout << f.num << "/" << f.denom << endl;
   }
   return 0;
 }
