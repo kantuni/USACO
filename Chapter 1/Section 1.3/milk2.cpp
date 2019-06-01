@@ -36,6 +36,6 @@ int main() {
     tm = max(tm, milk);
     tnm = max(tnm, nomilk);
   }
-  fout << tm << " " << tnm << "\n";
+  fout << tm << " " << tnm << endl;
   return 0;
 }
