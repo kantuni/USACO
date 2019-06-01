@@ -20,9 +20,9 @@ int main() {
     cnum *= comet[i] - 'A' + 1;
   }
   if (gnum % 47 == cnum % 47) {
-    fout << "GO\n";
+    fout << "GO" << endl;
   } else {
-    fout << "STAY\n";
+    fout << "STAY" << endl;
   }
   return 0;
 }
