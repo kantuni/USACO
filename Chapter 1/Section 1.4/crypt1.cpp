@@ -41,6 +41,6 @@ int main() {
       ans += ok;
     }
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
