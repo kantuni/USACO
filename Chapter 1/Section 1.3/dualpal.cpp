@@ -45,7 +45,7 @@ int main() {
       }
     }
     if (cnt > 1) {
-      fout << i << "\n";
+      fout << i << endl;
       n--;
     }
   }
