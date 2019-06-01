@@ -36,7 +36,7 @@ void solve(int p, int curr, int n) {
       }
     }
   } else {
-    fout << p << "\n";
+    fout << p << endl;
   }
 }
 
