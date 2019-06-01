@@ -39,12 +39,12 @@ int main() {
       }
       if (valid) {
         nonames = false;
-        fout << name << "\n";
+        fout << name << endl;
       }
     }
   }
   if (nonames) {
-    fout << "NONE\n";
+    fout << "NONE" << endl;
   }
   return 0;
 }
