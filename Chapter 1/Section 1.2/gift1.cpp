@@ -33,7 +33,7 @@ int main() {
     }
   }
   for (int i = 0; i < n; i++) {
-    fout << names[i] << " " << memo[names[i]] << "\n";
+    fout << names[i] << " " << memo[names[i]] << endl;
   }
   return 0;
 }
