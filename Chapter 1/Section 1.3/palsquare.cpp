@@ -40,7 +40,7 @@ int main() {
     string nb = convert(n, b);
     string nsb = convert(n * n, b);
     if (palindrome(nsb)) {
-      fout << nb << " " << nsb << "\n";
+      fout << nb << " " << nsb << endl;
     }
   }
   return 0;
