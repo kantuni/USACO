@@ -53,6 +53,6 @@ int main() {
       }
     }
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
