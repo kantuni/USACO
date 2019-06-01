@@ -60,6 +60,6 @@ int main() {
       fout << " " << i + 1;
     }
   }
-  fout << "\n";
+  fout << endl;
   return 0;
 }
