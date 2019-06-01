@@ -73,6 +73,6 @@ int main() {
   } else {
     ans = 7;
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
