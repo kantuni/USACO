@@ -33,6 +33,6 @@ int main() {
       ans = (ans == -1) ? amnt : min(ans, amnt);
     }
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
