@@ -19,7 +19,6 @@ int main() {
       fin >> farmers[i].first >> farmers[i].second;
     }
     sort(farmers.begin(), farmers.end());
-    int ans = 0;
     for (int i = 0; n > 0 and i < m; i++) {
       int q = min(n, farmers[i].second);
       ans += farmers[i].first * q;
