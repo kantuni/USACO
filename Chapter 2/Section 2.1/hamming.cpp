@@ -39,9 +39,9 @@ int main() {
   for (int i = 0; i < n; i++) {
     fout << ans[i];
     if (i == n - 1 or (i + 1) % 10 == 0) {
-      fout << "\n";
+      fout << endl;
     } else {
-      fout << " ";
+      fout << endl;
     }
   }
   return 0;
