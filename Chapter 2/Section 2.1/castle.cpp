@@ -46,8 +46,8 @@ int main() {
       }
     }
   }
-  fout << comp - 1 << "\n";
-  fout << mr << "\n";
+  fout << comp - 1 << endl;
+  fout << mr << endl;
   int rx, ry, rs;
   int nmr = -1;
   for (int i = 0; i < n; i++) {
@@ -110,7 +110,7 @@ int main() {
     }
   }
   char side = (rs == 1) ? 'W' : (rs == 2) ? 'N' : (rs == 4) ? 'E' : 'S';
-  fout << nmr << "\n";
-  fout << rx + 1 << " " << ry + 1 << " " << side << "\n";
+  fout << nmr << endl;
+  fout << rx + 1 << " " << ry + 1 << " " << side << endl;
   return 0;
 }
