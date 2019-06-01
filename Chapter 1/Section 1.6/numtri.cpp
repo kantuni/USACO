@@ -35,6 +35,6 @@ int main() {
       fin >> t[i][j];
     }
   }
-  fout << solve(0, 0, n) << "\n";
+  fout << solve(0, 0, n) << endl;
   return 0;
 }
