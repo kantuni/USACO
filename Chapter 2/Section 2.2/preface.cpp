@@ -11,7 +11,7 @@ string r[] = {"I", "V", "X", "L", "C", "D", "M"};
 string r1[] = {"I", "X", "C", "M"};
 string r5[] = {"V", "L", "D"};
 
-string toRoman(int n) {
+string to_roman(int n) {
   string res;
   int p = 0;
   while (n > 0) {
@@ -45,7 +45,7 @@ int main() {
   fin >> n;
   map<char, int> ans;
   for (int i = 1; i <= n; i++) {
-    string roman = toRoman(i);
+    string roman = to_roman(i);
     for (auto l: roman) {
       ans[l]++;
     }
