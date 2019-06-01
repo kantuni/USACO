@@ -71,6 +71,6 @@ int main() {
     }
     ans += loop;
   }
-  fout << ans << "\n";
+  fout << ans << endl;
   return 0;
 }
