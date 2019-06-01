@@ -34,11 +34,11 @@ int main() {
     }
   }
   if (ans.size() == 0) {
-    fout << "NONE" << "\n";
+    fout << "NONE" << endl;
   } else {
     sort(ans.begin(), ans.end());
     for (int i = 0; i < ans.size(); i++) {
-      fout << ans[i].second << " " << ans[i].first << "\n";
+      fout << ans[i].second << " " << ans[i].first << endl;
     }
   }
   return 0;
