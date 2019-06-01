@@ -76,7 +76,7 @@ int main() {
   }
   for (auto palindrome: palindromes) {
     if (prime(palindrome, a, b)) {
-      fout << palindrome << "\n";
+      fout << palindrome << endl;
     }
   }
   return 0;
