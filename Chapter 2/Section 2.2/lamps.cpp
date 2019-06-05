@@ -7,9 +7,6 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> on, off;
-set<string> ans;
-
 string click(string s, int btn) {
   if (btn == 0) {
     for (int i = 0; i < s.size(); i++) {
@@ -31,54 +28,67 @@ string click(string s, int btn) {
   return s;
 }
 
-void solve(string s, int n) {
-  if (n == 0) {
-    for (auto lid: on) {
-      if (s[lid - 1] != '1') {
-        return;
-      }
-    }
-    for (auto lid: off) {
-      if (s[lid - 1] != '0') {
-        return;
-      }
-    }
-    ans.insert(s);
-  } else {
-    for (int i = 0; i < 4; i++) {
-      solve(click(s, i), n - 1);
-    }
-  }
-}
-
 int main() {
   ifstream fin("lamps.in");
   ofstream fout("lamps.out");
   int n, c;
   fin >> n >> c;
+  vector<int> on;
   while (true) {
-    int lid;
-    fin >> lid;
-    if (lid == -1) {
+    int id;
+    fin >> id;
+    if (id == -1) {
       break;
     }
-    on.push_back(lid);
+    on.push_back(id);
   }
+  vector<int> off;
   while (true) {
-    int lid;
-    fin >> lid;
-    if (lid == -1) {
+    int id;
+    fin >> id;
+    if (id == -1) {
       break;
     }
-    off.push_back(lid);
+    off.push_back(id);
   }
   string start = string(n, '1');
-  solve(start, c);
+  set<string> all;
+  all.insert(start); 
+  if (c > 0) {
+    all.insert(click(start, 0));
+    all.insert(click(start, 1));
+    all.insert(click(start, 2));
+    all.insert(click(start, 3));
+  }
+  if (c > 1) {
+    all.insert(click(click(start, 0), 3));
+    all.insert(click(click(start, 1), 3));
+    all.insert(click(click(start, 2), 3));
+  }
+  vector<string> ans;
+  for (auto conf: all) {
+    bool ok = true;
+    for (auto id: on) {
+      if (conf[id - 1] != '1') {
+        ok = false;
+        break;
+      }
+    }
+    for (auto id: off) {
+      if (conf[id - 1] != '0') {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) {
+      ans.push_back(conf);
+    }
+  }
   if (ans.size() == 0) {
     fout << "IMPOSSIBLE" << endl;
   } else {
     for (auto val: ans) {
-      fout << val << endl; 
+      fout << val << endl;
     }
   }
   return 0;
