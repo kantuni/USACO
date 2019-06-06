@@ -9,6 +9,7 @@ using namespace std;
 
 string s;
 vector<string> ps;
+map<int, int> memo;
 
 bool prefix(int start, string p) {
   if (p.size() > s.size() + start) {
@@ -23,14 +24,25 @@ bool prefix(int start, string p) {
 }
 
 int solve(int start) {
-  int mx = 0;
-  for (auto p: ps) {
-    if (prefix(start, p)) {
-      int skip = p.size();
-      mx = max(mx, skip + solve(start + skip));
+  stack<pair<int, int>> s;
+  s.push({start, 0});
+  int ans = 0;
+  while (!s.empty()) {
+    auto cur = s.top(); s.pop();
+    int from = cur.first, len = cur.second;
+    if (memo[from] > 0) {
+      continue;
     }
+    for (auto p: ps) {
+      if (prefix(from, p)) {
+        int skip = p.size();
+        s.push({from + skip, skip + len});
+        ans = max(ans, skip + len);
+      }
+    }
+    memo[from] = ans;
   }
-  return mx;
+  return ans;
 }
 
 int main() {
