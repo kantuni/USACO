@@ -4,6 +4,7 @@ TASK: nocows
 LANG: C++14
 */
 
+// WA
 #include <bits/stdc++.h>
 #define P 9901
 using namespace std;
