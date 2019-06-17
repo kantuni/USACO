@@ -37,7 +37,7 @@ int eval(string& exp) {
   return ans;
 }
 
-void dfs(string s, int i, int n) {
+void dfs(string s, int i, int& n) {
   if (i == n) {
     if (eval(s) == 0) {
       fout << s << endl;
