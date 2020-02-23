@@ -12,7 +12,9 @@ using namespace std;
 map<int, map<int, int>> memo;
 
 int solve(int n, int k) {
-  if (n < 3 or k < 2) return 0;
+  if (n < 3 or k < 2) {
+    return 0;
+  }
   if (memo[n].count(k) == 0) {
     int c1 = solve(n - 2, k) / 2;
     int c2 = solve(n - 2, k - 1) * (n - pow(2, k - 2) - 1);
