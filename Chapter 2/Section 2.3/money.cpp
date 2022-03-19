@@ -4,18 +4,20 @@ TASK: money
 LANG: C++14
 */
 
-// WA
 #include <bits/stdc++.h>
 using namespace std;
+
+const int MAX_N = 10000;
+const int MAX_V = 25;
 
 long long solve(int n, int last);
 long long remember(int n, int last);
 
 vector<int> denoms;
-map<int, map<int, long long>> memo;
+long long memo[MAX_N][MAX_V];
 
 long long solve(int n, int last) {
-  if (n < 2) {
+  if (n == 0) {
     return 1;
   }
   long long ans = 0;
@@ -29,7 +31,7 @@ long long solve(int n, int last) {
 }
 
 long long remember(int n, int last) {
-  if (memo.count(n) == 0 or memo[n].count(last) == 0) {
+  if (memo[n][last] == -1) {
     memo[n][last] = solve(n, last);
   }
   return memo[n][last];
@@ -39,13 +41,14 @@ int main() {
   ifstream fin("money.in");
   ofstream fout("money.out");
   int V, N;
-  cin >> V >> N;
+  fin >> V >> N;
   denoms.assign(V, 0);
   for (int i = 0; i < denoms.size(); i++) {
-    cin >> denoms[i];
+    fin >> denoms[i];
   }
   sort(denoms.begin(), denoms.end());
+  memset(memo, -1, sizeof memo);
   long long ans = solve(N, V - 1);
-  cout << ans << endl;
+  fout << ans << endl;
   return 0;
 }
