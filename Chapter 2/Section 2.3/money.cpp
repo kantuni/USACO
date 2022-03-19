@@ -7,14 +7,14 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAX_N = 10000;
-const int MAX_V = 25;
-
 long long solve(int n, int last);
 long long remember(int n, int last);
 
-vector<int> denoms;
+const int MAX_N = 10000;
+const int MAX_V = 25;
+
 long long memo[MAX_N][MAX_V];
+vector<int> coins;
 
 long long solve(int n, int last) {
   if (n == 0) {
@@ -22,10 +22,10 @@ long long solve(int n, int last) {
   }
   long long ans = 0;
   for (int i = 0; i <= last; i++) {
-    if (n - denoms[i] < 0) {
+    if (n - coins[i] < 0) {
       break;
     }
-    ans += remember(n - denoms[i], i);
+    ans += remember(n - coins[i], i);
   }
   return ans;
 }
@@ -42,11 +42,11 @@ int main() {
   ofstream fout("money.out");
   int V, N;
   fin >> V >> N;
-  denoms.assign(V, 0);
-  for (int i = 0; i < denoms.size(); i++) {
-    fin >> denoms[i];
+  coins.assign(V, 0);
+  for (int i = 0; i < coins.size(); i++) {
+    fin >> coins[i];
   }
-  sort(denoms.begin(), denoms.end());
+  sort(coins.begin(), coins.end());
   memset(memo, -1, sizeof memo);
   long long ans = solve(N, V - 1);
   fout << ans << endl;
