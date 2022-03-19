@@ -7,14 +7,21 @@ LANG: C++14
 #include <bits/stdc++.h>
 using namespace std;
 
-long long solve(int n, int last);
 long long remember(int n, int last);
+long long solve(int n, int last);
 
 const int MAX_N = 10000;
 const int MAX_V = 25;
 
 long long memo[MAX_N][MAX_V];
 vector<int> coins;
+
+long long remember(int n, int last) {
+  if (memo[n][last] == -1) {
+    memo[n][last] = solve(n, last);
+  }
+  return memo[n][last];
+}
 
 long long solve(int n, int last) {
   if (n == 0) {
@@ -28,13 +35,6 @@ long long solve(int n, int last) {
     ans += remember(n - coins[i], i);
   }
   return ans;
-}
-
-long long remember(int n, int last) {
-  if (memo[n][last] == -1) {
-    memo[n][last] = solve(n, last);
-  }
-  return memo[n][last];
 }
 
 int main() {
