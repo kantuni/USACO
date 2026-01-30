@@ -16,7 +16,7 @@ bool valid(int r, int c) {
   return rok and cok and b[r][c] == '.';
 }
 
-tuple<int, int, char> tick(int r, int c, char d) {
+tuple<int, int, char> move(int r, int c, char d) {
   if (d == 'N') {
     return valid(r - 1, c) ? make_tuple(r - 1, c, 'N') : make_tuple(r, c, 'E');
   } else if (d == 'E') {
@@ -47,8 +47,8 @@ int main() {
   }
   s.insert({rf, cf, df, rc, cc, dc});
   while (true) {
-    tie(rf, cf, df) = tick(rf, cf, df);
-    tie(rc, cc, dc) = tick(rc, cc, dc);
+    tie(rf, cf, df) = move(rf, cf, df);
+    tie(rc, cc, dc) = move(rc, cc, dc);
     if (rf == rc and cf == cc) {
       fout << s.size() << "\n";
       break;
