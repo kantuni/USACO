@@ -22,21 +22,6 @@ void dfs(int u, int c) {
   }
 }
 
-double fw(vector<vector<double>> D) {
-  double diam = 0;
-  for (int k = 0; k < n; k++) {
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) {
-        D[i][j] = min(D[i][j], D[i][k] + D[k][j]);
-        if (D[i][j] != INF) {
-          diam = max(diam, D[i][j]);
-        }
-      }
-    }
-  }
-  return diam;
-}
-
 int main() {
   ifstream fin("cowtour.in");
   ofstream fout("cowtour.out");
@@ -63,14 +48,6 @@ int main() {
       c++;
     }
   }
-  set<int> s1, s2;
-  for (int u = 0; u < n; u++) {
-    if (color[u] == 1) {
-      s1.insert(u);
-    } else {
-      s2.insert(u);
-    }
-  }
   D.assign(n, vector<double>(n, INF));
   for (int u = 0; u < n; u++) {
     D[u][u] = 0;
@@ -84,17 +61,42 @@ int main() {
       }
     }
   }
-  double ans = INF;
-  for (auto u: s1) {
-    for (auto v: s2) {
-      auto [xu, yu] = coords[u];
-      auto [xv, yv] = coords[v];
-      D[u][v] = hypot(xu - xv, yu - yv);
-      ans = min(ans, fw(D));
-      D[u][v] = INF;
+  // Floyd-Warshall
+  for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        D[i][j] = min(D[i][j], D[i][k] + D[k][j]);
+      }
+    }
+  }
+  double diam1 = 0;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (D[i][j] != INF) {
+        diam1 = max(diam1, D[i][j]);
+      }
+    }
+  }
+  vector<double> mxd(n);
+  for (int u = 0; u < n; u++) {
+    for (int v = 0; v < n; v++) {
+      if (D[u][v] != INF) {
+        mxd[u] = max(mxd[u], D[u][v]);
+      }
+    }
+  }
+  double diam2 = INF;
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      if (color[i] != color[j]) {
+        auto [xi, yi] = coords[i];
+        auto [xj, yj] = coords[j];
+        auto d = hypot(xi - xj, yi - yj);
+        diam2 = min(diam2, mxd[i] + d + mxd[j]);
+      }
     }
   }
   fout << fixed << setprecision(6);
-  fout << ans << "\n";
+  fout << max(diam1, diam2) << "\n";
   return 0;
 }
