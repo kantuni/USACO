@@ -77,11 +77,11 @@ int main() {
       }
     }
   }
-  vector<double> mxd(n);
-  for (int u = 0; u < n; u++) {
-    for (int v = 0; v < n; v++) {
-      if (D[u][v] != INF) {
-        mxd[u] = max(mxd[u], D[u][v]);
+  vector<double> diam(n);
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (D[i][j] != INF) {
+        diam[i] = max(diam[i], D[i][j]);
       }
     }
   }
@@ -92,7 +92,7 @@ int main() {
         auto [xi, yi] = coords[i];
         auto [xj, yj] = coords[j];
         auto d = hypot(xi - xj, yi - yj);
-        diam2 = min(diam2, mxd[i] + d + mxd[j]);
+        diam2 = min(diam2, diam[i] + d + diam[j]);
       }
     }
   }
