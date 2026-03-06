@@ -13,16 +13,14 @@ map<int, pair<int, char>> g;
 map<int, int> color;
 int cs = -1, cnt = 0;
 
-void print(char c) {
-  // Where does this come from?
-  if (c == '\0') {
-    return;
-  }
-  fout << c;
-  cnt++;
-  if (cnt % 76 == 0) {
-    fout << "\n";
-    cnt = 0;
+void print(string s) {
+  for (auto c: s) {
+    fout << c;
+    cnt++;
+    if (cnt % 76 == 0) {
+      fout << "\n";
+      cnt = 0;
+    }
   }
 }
 
@@ -31,14 +29,17 @@ void dfs(int u) {
   auto [v, q] = g[u];
   if (color[v] == 0) {
     if (v == cs) {
-      print('(');
+      print("(");
     }
-    print(q);
+    print(string(1, q));
     dfs(v);
   } else {
-    print(q);
+    // Ignore 0 -> 0 loop
+    if (v != 0) {
+      print(string(1, q));
+    }
     if (cs != -1) {
-      print(')');
+      print(")");
     }
   }
 }
@@ -47,9 +48,9 @@ int main() {
   int n, d;
   fin >> n >> d;
   int a = n / d;
-  int nc = n - a * d;
+  int nc = n % d;
   while (nc % d > 0) {
-    int rem = nc * 10 % d;
+    int rem = (nc * 10) % d;
     if (g.count(nc) > 0) {
       cs = rem;
       break;
@@ -58,23 +59,19 @@ int main() {
     g[nc] = {rem, q};
     nc = rem;
   }
-  string sa = to_string(a);
-  for (auto c: sa) {
-    print(c);
-  }
-  print('.');
-  int u = n - a * d;
+  print(to_string(a));
+  print(".");
+  int u = n % d;
   if (u % d == 0) {
-    print('0');
+    print("0");
   } else if (cs == u) {
-    print('(');
-    print(g[u].second);
-    print(')');
+    auto [_, q] = g[u];
+    print("(" + string(1, q) + ")");
   } else {
     dfs(u);
   }
   if (cnt > 0) {
-    fout << "\n";
+    print("\n");
   }
   return 0;
 }
