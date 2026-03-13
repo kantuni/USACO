@@ -27,7 +27,7 @@ int main() {
         s.insert(val);
       }
     }
-    s.erase(begin(s));
+    s.erase(mn);
   }
   auto ans = *begin(s);
   fout << ans << "\n";
