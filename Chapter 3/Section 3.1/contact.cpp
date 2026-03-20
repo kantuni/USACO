@@ -24,8 +24,8 @@ int main() {
     }
   }
   map<int, vector<string>, greater<int>> freq;
-  for (auto [key, cnt]: memo) {
-    freq[cnt].push_back(key);
+  for (auto [p, cnt]: memo) {
+    freq[cnt].push_back(p);
   }
   for (auto [cnt, ps]: freq) {
     if (n == 0) {
