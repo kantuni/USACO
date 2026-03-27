@@ -14,16 +14,7 @@ int main() {
   fin >> n;
   int ans = 1;
   for (int i = 2; i <= n; i++) {
-    int j = i;
-    int cnt = 0;
-    while (j % 5 == 0) {
-      j /= 5;
-      cnt++;
-    }
-    while (cnt--) {
-      ans /= 2;
-    }
-    ans *= j;
+    ans *= i;
     while (ans % 10 == 0) {
       ans /= 10;
     }
