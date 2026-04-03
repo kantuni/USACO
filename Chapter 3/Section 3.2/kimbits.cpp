@@ -15,7 +15,7 @@ int main() {
   auto cnt = 0;
   string s;
   if (L == N) {
-    s = bitset<32>(I - 1).to_string(); 
+    s = bitset<32>(I - 1).to_string();
   } else if (I < (1LL << L)) {
     for (auto i = 0; i < (1LL << L) + 1; i++) {
       bitset<32> b(i);
